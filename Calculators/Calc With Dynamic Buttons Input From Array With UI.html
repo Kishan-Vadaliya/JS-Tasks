@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            background-color: #333;
+            padding: 20px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        #result {
+            grid-column: span 4;
+            height: 50px;
+            font-size: 24px;
+            text-align: right;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background-color: #222;
+            color: white;
+        }
+
+        button {
+            width: 100%;
+            height: 60px;
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #e67e22;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #d35400;
+        }
+
+        button:active {
+            background-color: #a84300;
+        }
+
+        button:nth-last-child(2) {
+            background-color: #e74c3c;
+        }
+
+        button:nth-last-child(2):hover {
+            background-color: #c0392b;
+        }
+
+        button:nth-last-child(2):active {
+            background-color: #922b21;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <input id="result" readonly>
+        <!-- Buttons will be injected here -->
+    </div>
+
+    <script>
+        const buttonsArray = ["1", "2", "3", "+",
+                              "4", "5", "6", "-",
+                              "7", "8", "9", "*",
+                              "0", ".", "/", "=",
+                              "AC"];
+
+        const calculator = document.querySelector(".calculator");
+
+        buttonsArray.forEach(button => {
+            const buttonElement = document.createElement('button');
+            buttonElement.textContent = button;
+            buttonElement.onclick = () => calculate(button);
+            calculator.appendChild(buttonElement);
+        });
+
+        // Function to handle button clicks and keyboard inputs
+
+        function calculate(value) {
+            const result = document.getElementById('result');
+            if (value === '=') {
+                try {
+                    result.value = eval(result.value);
+                } catch {
+                    result.value = "Error";
+                }
+            } else if (value === 'AC') {
+                result.value = '';
+            } else {
+                result.value += value;
+            }
+        }
+
+        // Adding event listener for keyboard input
+        
+        document.addEventListener('keydown', (e) => {
+            const validKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '.', 'Enter', 'Backspace'];
+            if (validKeys.includes(e.key)) {
+                if (e.key === 'Enter') {
+                    calculate('=');
+                } else if (e.key === 'Backspace') {
+                    calculate('AC');
+                } else {
+                    calculate(e.key);
+                }
+
+            }
+
+            
+        });
+    </script>
+</body>
+
+</html>
