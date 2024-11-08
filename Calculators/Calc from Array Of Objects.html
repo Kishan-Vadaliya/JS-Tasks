@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="calculator">
+        <input id="result">
+    </div>
+</body>
+
+<script>
+
+    let buttonsArr = [  { b1: "1" }, { b2: "2" }, { b3: "3" },
+                        { b4: "4" }, { b5: "5" }, { b6: "6" },
+                        { b7: "7" }, { b8: "8" }, { b9: "9" },
+                        { bDot: "." }, { b0: "0" }, { bAc: "AC" },
+                        { bEq: "=" }, { bPlus: "+" }, { bMinus: "-" },
+                        { bMulti: "*" }, { bDiv: "/" } ];
+
+
+    let calculator = document.querySelector(".calculator");
+
+    buttonsArr.forEach((button) => {
+
+        // console.log = Object.values(button)[0];
+
+        let keyValue = Object.values(button)[0];
+        let buttonsEle = document.createElement('button');
+        buttonsEle.textContent = keyValue;
+        buttonsEle.onclick = () => calculate(keyValue);
+        calculator.appendChild(buttonsEle);
+    });
+
+    function calculate(value) {
+        let result = document.getElementById('result');
+        if (value === '=') {
+            result.value = eval(result.value);
+        } else if (value === 'AC') {
+            result.value = '';
+        } else {
+            result.value += value;
+        }
+    }
+
+</script>
+
+</html>                  
