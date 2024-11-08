@@ -2,33 +2,33 @@
 <html lang="en">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Get File Extension</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Extension Checker</title>
 </head>
 
 <body>
-  <div class="container">
-    <input type="file" id="my-file" />
-    <p id="message">Click on button to choose file</p>
-  </div>
 
-  <script>
-let file = document.getElementById("my-file");
-let message = document.getElementById("message");
-file.addEventListener("input", () => {
-  // Check if the user has selected any file (i.e., file.files contains at least one file)
-  if (file.files.length) {
-    // Extract the file extension from the selected file's name
-    // file.files[0].name gives the full name of the first selected file
-    // .split(".") splits the name by the dot (.) and .pop() gets the last part, which is the file extension
-    let fileExtension = file.files[0].name.split(".").pop();
-    message.innerHTML = fileExtension;
-  }
-  else {
-    message.innerHTML = "Please select a file";
-  }
-});
-  </script>
+    <input type="text" id="fileInput" placeholder="Enter File Name">
+
+    <button onclick="getFileExtension()">Get Extension</button>
+    <br>
+    <br>
+    <p id="extension"></p>
+
+    <script>
+
+        function getFileExtension() {
+
+            let fileName = document.getElementById("fileInput").value;
+
+            let extension = fileName.split('.').pop();
+
+            document.getElementById("extension").innerHTML = "File Extension: " + extension;
+        }
+
+    </script>
+
 </body>
 
 </html>
