@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Validations</title>
+</head>
+
+<body>
+
+    <form id="uploadForm">
+        <label for="file"> Select Your File. (Size must be between 2MB and 10MB & pdf, jpeg, png, gif, svg, txt only):
+            <br><br>
+            <input type="file" id="file" accept=".pdf, .jpeg, .jpg, .png, .gif, .svg, .txt">
+            <br><br>
+            <div id="file-preview-container" style="display: none;">
+                <embed id="file-preview" src="#" width="500px" height="600px" type="application/pdf" style="display: none;" />
+                <textarea id="text-preview" rows="10" cols="50" style="display: none;"></textarea>
+                <img id="image-preview" src="#" alt="Preview Uploaded Image" style="display: none; max-width: 500px; max-height: 500px;">
+            </div>
+            <br><br>
+        </label>
+        <button type="submit">Submit</button>
+        <div id="userinfo"></div>
+    </form>
+
+    <script>
+        const input = document.querySelector("input[type=file]");
+        const userInfo = document.getElementById('userinfo');
+        const form = document.getElementById('uploadForm');
+        const filePreviewContainer = document.getElementById('file-preview-container');
+        const filePreview = document.getElementById('file-preview');
+        const textPreview = document.getElementById('text-preview');
+        const imagePreview = document.getElementById('image-preview');
+
+        // Add file preview functionality
+        input.addEventListener("change", previewFile);
+
+        function previewFile() {
+            const file = input.files[0]; // Get the file from input
+            if (file) {
+                const fileReader = new FileReader();
+                const fileType = file.type;
+
+                filePreviewContainer.style.display = 'block'; // Make sure preview container is visible
+
+                if (fileType === "application/pdf") {
+                    filePreview.style.display = 'block';
+                    textPreview.style.display = 'none';
+                    imagePreview.style.display = 'none';
+                    fileReader.onload = function (event) {
+                        filePreview.src = event.target.result; // Set the PDF preview
+                    };
+                    fileReader.readAsDataURL(file); // Read file as Data URL for embedding
+                } else if (fileType === "text/plain") {
+                    filePreview.style.display = 'none';
+                    textPreview.style.display = 'block';
+                    imagePreview.style.display = 'none';
+                    fileReader.onload = function (event) {
+                        textPreview.textContent = event.target.result; // Display text content
+                    };
+                    fileReader.readAsText(file); // Read text file content
+                } else if (fileType.startsWith("image/")) {
+                    filePreview.style.display = 'none';
+                    textPreview.style.display = 'none';
+                    imagePreview.style.display = 'block';
+                    fileReader.onload = function (event) {
+                        imagePreview.src = event.target.result; // Display image content
+                    };
+                    fileReader.readAsDataURL(file); // Read image file
+                } else {
+                    filePreviewContainer.style.display = 'none'; // Hide preview if file type is not supported
+                }
+            }
+        }
+
+        // Prevent default form submission to handle validation
+        form.addEventListener("submit", (event) => {
+            event.preventDefault(); // Prevent form from submitting
+
+            const error = validateFile(); // Validate the file
+
+            if (error) {
+                userInfo.textContent = error.message; // Show error message
+                filePreviewContainer.style.display = 'none'; // Hide file preview if there's an error
+            } else {
+                userInfo.textContent = "Uploading starting..."; // Indicate the start of upload
+                // You can process the file further here
+            }
+        });
+
+        // File validation function
+        function validateFile() {
+            const file = input.files[0]; // Get the first file
+            if (!file) {
+                return new Error("No File Selected"); // Error if no file selected
+            }
+
+            const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'text/plain']; // Allowed file types
+            const fileSizeInKB = Math.round(file.size / 1024); // File size in KB
+
+            // Validate file size
+            if (fileSizeInKB > 10240) { // Maximum 10MB
+                return new Error("File is too large. Maximum size allowed is 10MB.");
+            } else if (fileSizeInKB < 2048) { // Minimum 2MB
+                return new Error("File is too small. Minimum size allowed is 2MB.");
+            }
+
+            // Validate file type
+            if (!allowedTypes.includes(file.type)) {
+                return new Error("Invalid file type. Only PDF, JPEG, GIF, SVG, PNG, and TXT are allowed.");
+            }
+
+            return null; // Return null if no error
+        }
+    </script>
+
+</body>
+
+</html>
