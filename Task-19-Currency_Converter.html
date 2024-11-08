@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+</head>
+
+<body>
+    <h2>Currency Converter Indian Rupees To US Dollar & United Arab Emirates Dirhams</h2>
+
+    <div>
+        <div class="Input Div"></div>
+        <label>Indian Rupees</label><br>
+        <input type="number" value="0" id="inr" class="input">
+    </div>
+
+    <br>
+
+    <div>
+        <div class="Input Div"></div>
+        <label>US Dollar</label><br>
+        <input type="number" value="0" id="usd" class="input">
+    </div>
+
+    <br>
+
+    <div class="Input Div">
+        <label>United Arab Emirates Dirhams</label><br>
+        <input type="number" value="0" id="aed" class="input">
+    </div>
+
+    <br>
+
+    <script>
+        let usdInput = document.getElementById('usd');
+        let aedInput = document.getElementById('aed');
+        let inrInput = document.getElementById('inr');
+
+        inrInput.addEventListener('input', () => {
+            let inrValue = inrInput.value;
+            let usdValue = inrValue / 83.85;
+            let aedValue = inrValue / 22.89;
+            usdInput.value = usdValue.toFixed(2);
+            aedInput.value = aedValue.toFixed(2);
+        });
+
+        usdInput.addEventListener('input', () => {
+            let usdValue = usdInput.value;
+            let inrValue = usdValue * 83.85;
+            let aedValue = usdValue / 0.27;
+            inrInput.value = inrValue.toFixed(2);
+            aedInput.value = aedValue.toFixed(2);
+
+        });
+
+        aedInput.addEventListener('input', () => {
+            let aedValue = aedInput.value;
+            let inrValue = aedValue * 23;
+            let usdValue = aedValue / 3.67;
+            inrInput.value = inrValue.toFixed(2);
+            usdInput.value = usdValue.toFixed(2);
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

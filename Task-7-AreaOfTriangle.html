@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>
+        Write a JavaScript program to find the area of a triangle where three sides are 5, 6, 7.
+    </h3>
+</body>
+<script>
+
+
+    let side1 = Number(prompt("Side1"));
+
+    let side2 = Number(prompt("Side2"));
+
+    let side3 = Number(prompt("Side3"));
+
+    let p = ((side1 + side2 + side3) / 2);
+
+    let areaOfTriangle = Math.sqrt(p * (
+        (p - side1) *
+        (p - side2) *
+        (p - side3))
+    );
+
+    alert(areaOfTriangle)
+
+</script>
+
+</html>

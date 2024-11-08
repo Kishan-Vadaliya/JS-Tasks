@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Extract Specific Property Values from object as an array</title>
+</head>
+
+<body></body>
+
+<script>
+
+  let array = [
+    
+    {
+      a: 1,
+      b: 2,
+      c: 3,
+      d: 6
+    },
+
+    {
+      a: 4,
+      b: 5,
+      c: 3,
+      d: 6
+    },
+
+    {
+      a: 8,
+      b: 9,
+      c: 3,
+      d: 6
+    },
+  ];
+
+  let tempC = "c";
+
+  let tempArray = array.map((obj) => obj[tempC]);
+
+  console.log(tempArray);
+
+
+
+</script>
+
+</html>

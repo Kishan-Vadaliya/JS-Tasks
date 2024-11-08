@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Manipulations</title>
+</head>
+
+<body>
+
+    <input type="text" id="NameField" placeholder="Enter Name">
+    <br><br>
+    <input type="number" id="AgeField" placeholder="Enter Age">
+    <br><br>
+    <input type="text" id="ContactField" placeholder="Enter Contact No">
+    <br><br>
+    <input type="text" id="JobTitleField" placeholder="Enter Your Role">
+    <br><br>
+    <input type="text" id="UserTypeField" placeholder="Enter UserType">
+    <br><br>
+    <button onclick="addToArray()">Add to Array</button>
+    <br><br>
+    <button onclick="deleteFromArray()">Delete</button>
+    <br><br>
+    <textarea style="min-height: 350px; min-width: 750px;" id="Data" placeholder="Array Content"></textarea>
+
+    <script>
+        let array = [
+            {
+                name: "Kishan",
+                age: 5,
+                contact: 1234657890,
+                jobTitle: "Intern",
+                userType: "SuperAdmin",
+                id: 1
+            },
+            {
+                name: "Bhargav",
+                age: 9,
+                contact: 7894561230,
+                jobTitle: "React JS",
+                userType: "Only View",
+                id: 2
+            },
+            {
+                name: "Rohit",
+                age: 14,
+                contact: 4567981230,
+                jobTitle: "Next JS",
+                userType: "Only Delete",
+                id: 3
+            }
+        ];
+
+        let data = document.getElementById("Data");
+
+        window.onload = function () {
+            document.getElementById("Data").value = JSON.stringify(array);
+        };
+
+        function addToArray() {
+            let name = document.getElementById("NameField").value;
+            let age = document.getElementById("AgeField").value;
+            let contact = document.getElementById("ContactField").value;
+            let jobTitle = document.getElementById("JobTitleField").value;
+            let userType = document.getElementById("UserTypeField").value;
+            let id = array.length + 1;
+
+            let user = { name, age, contact, jobTitle, userType, id };
+
+            array.push(user);
+
+            document.getElementById("Data").value = JSON.stringify(array);
+        }
+
+        function deleteFromArray() {
+            let Id = Number(prompt("Enter the Id of the item to delete"));
+            array = array.filter(item => item.id !== Id);
+            document.getElementById("Data").value = JSON.stringify(array);
+        }
+    </script>
+</body>
+
+</html>

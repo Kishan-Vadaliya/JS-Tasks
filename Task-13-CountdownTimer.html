@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CountDown Timer</title>
+</head>
+<body>
+    <p id="countdown"></p>
+</body>
+
+<script>
+    let CountDownTime=Number(prompt("Enter your CountDown time"));
+    
+    let time =CountDownTime*60;
+
+    let countdownEL=document.getElementById("countdown");
+
+    setInterval(updateCountdown,1000);
+
+    function updateCountdown() {
+        let minutes = Math.floor(time / 60);
+        let seconds = time % 60;
+
+        seconds = seconds<10 ? '0' + seconds : seconds
+
+        countdownEL.innerHTML=`${minutes}:${seconds}`;
+
+        time--;
+    }
+
+
+</script>
+
+</html>
