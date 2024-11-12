@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PinPad_Login</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .buttons {
+            background-color: #333;
+            padding: 20px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        #pass {
+            grid-column: span 3;
+            height: 50px;
+            font-size: 24px;
+            text-align: right;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background-color: #222;
+            color: white;
+        }
+
+        button {
+            width: 100%;
+            height: 60px;
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #e67e22;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #d35400;
+        }
+
+        button:active {
+            background-color: #a84300;
+        }
+
+        button:nth-last-child(1) {
+            background-color: #24aa31;
+        }
+
+        button:nth-last-child(1):hover {
+            background-color: #1dbd4d;
+        }
+
+        button:nth-last-child(1):active {
+            background-color: #00750c;
+        }
+        button:nth-last-child(3) {
+            background-color: #e74c3c;
+        }
+
+        button:nth-last-child(3):hover {
+            background-color: #c0392b;
+        }
+
+        button:nth-last-child(3):active {
+            background-color: #922b21;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="buttons">
+        <input id="pass" type="password" maxlength="6">
+        <!-- Buttons will be injected here -->
+    </div>
+
+    <script>
+            const buttonsArray = [  "1",   "2",  "3",
+                                    "4",   "5",  "6",
+                                    "7",   "8",  "9",
+                                  "Clear", "0",  "OK" ];
+        
+        const buttons = document.querySelector(".buttons");
+
+        buttonsArray.forEach(button => {
+            const buttonElement = document.createElement('button');
+            buttonElement.textContent = button;
+            buttonElement.onclick = () => PinPad(button);
+            buttons.appendChild(buttonElement);
+        });
+
+        // The correct password
+
+        const correctPassword = '258852';
+
+        // Function to handle button clicks and keyboard inputs
+        
+        function PinPad(value) {
+            const pass = document.getElementById('pass');
+            if (value === 'OK') {
+                if (pass.value === correctPassword) {
+                    window.location.href = "https://www.hackerrank.com/profile/vadariyakishan11";
+                } else {
+                    alert("Incorrect Password");
+                }
+            } else if (value === 'Clear') {
+                pass.value = '';
+            } else {
+                pass.value += value;
+            }
+        }
+    </script>
+</body>
+</html>
