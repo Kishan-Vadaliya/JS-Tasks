@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz-Game</title>
+</head>
+<body>
+    <div class="quiz">
+        <div class="question-list" id="que-list"></div><br>
+        <div id="opt"></div><br>
+        <button onclick="checkAns()" id="submitBtn">Submit</button><br>
+        <div id="score"></div><br>
+    </div>
+
+    <script>
+        let questionArray = [
+            { 
+                Que: "Q1-What Is Capital Of India?", 
+                Ans: { A: 'Delhi', B: 'Mumbai', C: 'Bangalore' }, 
+                trueAns: "A" 
+            },
+            { 
+                Que: "Q2-What Is Capital Of Italy?", 
+                Ans: { A: 'Milan', B: 'Verona', C: 'Rome' }, 
+                trueAns: "C" 
+            },
+            { 
+                Que: "Q3-What Is Capital Of Belgium?", 
+                Ans: { A: 'Michelin', B: 'Antwerp', C: 'Brussels' }, 
+                trueAns: "C" 
+            },
+            { 
+                Que: "Q4-What Is Capital Of Australia?", 
+                Ans: { A: 'Canberra', B: 'Gold Coast', C: 'Sydney' }, 
+                trueAns: "A" 
+            },
+            { 
+                Que: "Q5-What Is Capital Of Spain?", 
+                Ans: { A: 'Valencia', B: 'Madrid', C: 'Barcelona' }, 
+                trueAns: "B" 
+            }
+        ];
+
+        let questionCount = 0;
+        let score = 0;
+        let selectedAns = null;
+
+        function displayQuestion() {
+            let question = questionArray[questionCount];
+            let queEle = document.getElementById("que-list");
+            queEle.textContent = question.Que;
+            let optEle = document.getElementById("opt");
+            optEle.innerHTML = " ";
+
+
+            for (let key in question.Ans) {
+                let optBtn = document.createElement('button');
+                optBtn.textContent = question.Ans[key];
+                optBtn.className = 'opt-btn';
+                optBtn.onclick = function () {
+                    selectAnswer(key);
+                };
+                optEle.appendChild(optBtn);
+            }
+        }
+
+        function selectAnswer(answer) {
+            selectedAns = answer;
+        }
+
+        function checkAns() {
+            let question = questionArray[questionCount];
+            let correctAns = question.trueAns;
+
+            if (selectedAns === correctAns) {
+                score++;
+            }  
+
+            document.getElementById("score").textContent = `Score: ${score}`;
+
+            questionCount++;
+
+            if (questionCount < questionArray.length) {
+                displayQuestion();
+            } else {
+                document.getElementById("score").textContent = `Final Score: ${score}`;
+                alert("Quiz Finished! Your score: " + score);
+            }
+        }
+
+        displayQuestion();
+    </script>
+</body>
+</html>
