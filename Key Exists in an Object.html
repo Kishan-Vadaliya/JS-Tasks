@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Exists in an Object</title>
+</head>
+<body>
+    <script>
+
+        const obj = {
+                        name: "Divyesh",
+                        age: 25,
+                        contact: 4561237890,
+                        jobTitle: "Web-Developer",
+                        userType: "SuperAdmin"
+                     };
+
+
+         const key = prompt("");
+
+            if (key in obj) {
+                alert(`Key "${key}" exists in the object.`);
+            } else {
+                alert(`Key "${key}" does not exist in the object.`);
+            }
+
+
+            // if (obj.hasOwnProperty(key)) {
+            //     console.log(`Key "${key}" exists in the object.`);
+            // } else {
+            //     console.log(`Key "${key}" does not exist in the object.`);
+            // }
+
+    </script>
+</body>
+</html>
